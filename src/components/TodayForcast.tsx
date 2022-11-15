@@ -12,7 +12,7 @@ const TodayForcast: FC = () => {
       <p className='text-xl leading-8 font-semibold mb-2 text-slate-700'>
         Today&lsquo;s Forecast for {weather?.name}, {weather?.sys?.country}
       </p>
-      <div className='flex p-2 border rounded mt-2'>
+      <div className='flex p-2 border rounded mt-2 justify-around'>
         <div className='current-weather'>
           <div className='text-sm text-gray-900 font-bold'>
             Current Temp:{' '}
@@ -77,7 +77,9 @@ const TodayForcast: FC = () => {
             {show ? 'Less' : 'See more'}
           </button>
         </div>
-        <div className='weather-icon'></div>
+        <div className='weather-icon'>
+          <img src={require('../assets/images/weather.ico')} alt='' className='h-20' />{' '}
+        </div>
       </div>
     </div>
   )
