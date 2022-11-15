@@ -6,11 +6,15 @@ import Carousel from './components/carousel'
 import TempConverter from './components/tempConverter'
 import SearchComp from './components/searchComp'
 import TodayForcast from './components/TodayForcast'
+import { State } from './store/rootReducers'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const { error } = useSelector((store: State) => store.WeatherReducer)
   return (
     <div className='wrapper container mx-auto'>
       <Header />
+      {error && <div className='text-lg font-bold text-red-300'>{error}</div>}
       <SearchComp />
       <div className={classNames('p-3 flex flex-col', 'xs:flex-row')}>
         <div className={classNames('left-wrapper w-12/12', 'xs:w-6/12')}>

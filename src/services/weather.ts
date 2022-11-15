@@ -21,10 +21,10 @@ const searchByZip = async (zipCode: number) => {
 const getCordByZip = async (zipCode: number) => {
   return get(`/geo/1.0/zip?zip=${zipCode}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
 }
-const fiveDayForecast = async (lat: number,lon:number) => {
+const fiveDayForecast = async (lat: number, lon: number) => {
   return get(
     `/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`,
   )
 }
 
-export { searchByCity, searchByZip,fiveDayForecast }
+export { searchByCity, searchByZip, fiveDayForecast }

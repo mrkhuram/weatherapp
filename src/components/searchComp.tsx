@@ -7,6 +7,7 @@ import { Actions, State } from '../store/rootReducers'
 
 const SearchComp: FC = () => {
   const [type, setType] = useState<string>('0')
+  const [error, setError] = useState<boolean>(false)
   const [searchKeyword, setSearchKeyword] = useState<string>('')
   const thunkDispatch: ThunkDispatch<State, undefined, Actions> = useDispatch()
 
@@ -14,10 +15,13 @@ const SearchComp: FC = () => {
     if (e.key == 'Enter') {
       if (type == '1') {
         thunkDispatch(getCurrentWeather(searchKeyword))
+        return true
       }
       if (type == '2') {
         thunkDispatch(getWeatherByZip(searchKeyword))
+        return true
       }
+      setError(true)
     }
   }
 
@@ -35,6 +39,7 @@ const SearchComp: FC = () => {
           setSearchKeyword(e.target.value)
         }}
         onKeyDown={searchHandler}
+        data-testid='search_input'
       />
       <select
         name=''
@@ -43,8 +48,13 @@ const SearchComp: FC = () => {
         className={classNames(
           'py-2 px-3 rounded border w-12/12 outline-none mt-2',
           'xs:mt-0 xs:w-2/12 xs:ml-4',
+          error && 'border-red-400',
         )}
-        onChange={(e) => setType(e.target.value)}
+        onChange={(e) => {
+          setType(e.target.value)
+          setError(false)
+        }}
+        data-testid='search_by'
       >
         <option value='0'>Search By</option>
         <option value='1'>City Name</option>
